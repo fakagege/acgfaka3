@@ -1,0 +1,43 @@
+#{include file="../Common/Header.html"}
+<div class="layui-container fly-marginTop fly-user-main">
+    #{include file="../Common/Nav.html"}
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief">
+            <div class="content-header">
+                <i class="layui-icon">&#xe705;</i> 文章资讯
+            </div>
+
+            <div class="content-body">
+                <ul class="fly-list">
+                    #{foreach $articles.data as $article}
+                    <li>
+                        <a href="/user/article/detail?id=#{$article.id}" class="fly-avatar">
+                            <img src="#{if $article.cover}#{$article.cover}#{else}#{$favicon}#{/if}" alt="#{$article.title}">
+                        </a>
+                        <h2>
+                            <a class="layui-badge">文章</a>
+                            <a href="/user/article/detail?id=#{$article.id}">#{$article.title}</a>
+                        </h2>
+                        <div class="fly-list-desc" style="padding: 5px 0; color: #666; font-size: 13px;">#{$article.summary}</div>
+                        <div class="fly-list-info">
+                            <span class="fly-list-nums">
+                                <i class="iconfont icon-yuedu" title="阅读"></i> #{$article.views}
+                            </span>
+                            <span>#{$article.create_time}</span>
+                        </div>
+                    </li>
+                    #{/foreach}
+                </ul>
+                
+                #{if count($articles.data) == 0}
+                <div class="fly-none">没有相关数据</div>
+                #{/if}
+
+                <div style="text-align: center;">
+                    #{$articles.links}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{include file="../Common/Footer.html"}

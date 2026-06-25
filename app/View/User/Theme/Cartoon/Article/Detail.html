@@ -1,0 +1,30 @@
+#{include file="../Common/Header.html"}
+<style>
+    .content-body img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<div class="layui-container fly-marginTop fly-user-main">
+    #{include file="../Common/Nav.html"}
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief">
+            <div class="content-header">
+                <i class="layui-icon">&#xe705;</i> #{$article.title}
+                <span style="float: right;font-size: 14px;color: #999;">
+                    <i class="iconfont icon-yuedu" title="阅读"></i> #{$article.views} &nbsp;&nbsp;
+                    <i class="layui-icon">&#xe68d;</i> #{$article.create_time}
+                </span>
+            </div>
+
+            <div class="content-body" style="padding: 20px;line-height: 26px;">
+                #{$article.content}
+            </div>
+            
+            <div style="padding: 20px;text-align: center;">
+                <a href="/user/article/index" class="layui-btn layui-btn-primary">返回列表</a>
+            </div>
+        </div>
+    </div>
+</div>
+#{include file="../Common/Footer.html"}

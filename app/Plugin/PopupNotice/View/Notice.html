@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="/app/Plugin/PopupNotice/View/css/f.css">
+<script src="/app/Plugin/PopupNotice/View/js/f.js"></script>
+
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        var config = JSON.parse(atob("#{$configBase64}"));
+        window.MyNavCard = $MGC(config);
+    });
+</script>

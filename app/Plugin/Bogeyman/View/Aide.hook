@@ -1,0 +1,31 @@
+{
+                        field: 'shield', title: '拉黑', formatter: function (val, item) {
+                            return '<span class="badge badge-light-primary shield_ip" style="cursor: pointer;" >拉黑IP</span>' + ' <span class="badge badge-light-primary shield_contact" style="cursor: pointer;" >拉黑联系方式</span>';
+                        },
+                        events: {
+                            'click .shield_ip': function (event, value, row, index) {
+                                let ip = util.escape(row.create_ip);
+                                layer.confirm('您确定要拉黑IP【'+ip+'】吗？', {
+                                    btn: ['确认', '取消']
+                                }, function () {
+                                    let loaderIndex = layer.load(2, {shade: ['0.3', '#fff']});
+                                    $.post("/plugin/Bogeyman/api/add", {content: row.create_ip , type : 1}, res => {
+                                        layer.close(loaderIndex);
+                                        layer.msg(res.msg);
+                                    });
+                                });
+                            },
+                            'click .shield_contact': function (event, value, row, index) {
+                                let contact = util.escape(row.contact);
+                                layer.confirm('您确定要拉黑联系方式【'+contact+'】吗？', {
+                                    btn: ['确认', '取消']
+                                }, function () {
+                                    let loaderIndex = layer.load(2, {shade: ['0.3', '#fff']});
+                                    $.post("/plugin/Bogeyman/api/add", {content: row.contact , type : 0}, res => {
+                                        layer.close(loaderIndex);
+                                        layer.msg(res.msg);
+                                    });
+                                });
+                            }
+                        }
+},

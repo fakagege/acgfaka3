@@ -1,0 +1,22 @@
+{
+                        field: 'makeOrder', title: '补单', formatter: function (val, item) {
+                            if (item.status == 1) {
+                                return '-';
+                            }
+                            return '<span class="badge badge-light-primary makeOrder" style="cursor: pointer;" >补单</span>';
+                        },
+                        events: {
+                            'click .makeOrder': function (event, value, row, index) {
+                                layer.confirm('您正在进行补单操作，是否继续？', {
+                                    btn: ['确认补单', '取消']
+                                }, function () {
+                                    let loaderIndex = layer.load(2, {shade: ['0.3', '#fff']});
+                                    $.post("/plugin/makeOrder/api/make", {order_id: row.id}, res => {
+                                        layer.close(loaderIndex);
+                                        layer.msg(res.msg);
+                                        table.bootstrapTable('refresh', {silent: true});
+                                    });
+                                });
+                            }
+                        }
+},
